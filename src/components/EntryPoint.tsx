@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
@@ -7,6 +8,12 @@ interface EntryPointProps {
 }
 
 export function EntryPoint({ onBegin }: EntryPointProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <div
       className="relative w-screen h-[100svh] overflow-hidden flex flex-col"
@@ -38,8 +45,8 @@ export function EntryPoint({ onBegin }: EntryPointProps) {
       {/* Logo + tagline — centered vertically */}
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={false}
+          animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center gap-3 text-center"
         >
@@ -64,8 +71,8 @@ export function EntryPoint({ onBegin }: EntryPointProps) {
       {/* Begin button — pinned near the bottom */}
       <div className="relative z-10 flex flex-col items-center pb-[calc(80px+env(safe-area-inset-bottom,0px))]">
         <motion.button
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={false}
+          animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={{ duration: 0.55, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
           onClick={onBegin}
           className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-base shadow-lg transition-transform active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-strong)]"
