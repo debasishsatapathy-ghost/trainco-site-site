@@ -1,3 +1,7 @@
+// Welcome & Landing (2)
+export { WelcomeHeroCard } from './WelcomeHeroCard';
+export { WelcomeButtonCard } from './WelcomeButtonCard';
+
 // Core Data Cards (9)
 export { KPIStrip } from './KPIStrip';
 export { BarChart } from './BarChart';

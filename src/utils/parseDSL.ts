@@ -58,6 +58,9 @@ function f(s: string | undefined): number {
 // ── Schema table ─────────────────────────────────────────────────────────────
 // Pipe counts used by the prompt to help the model self-validate.
 export const DSL_SCHEMA: Record<string, { pipeCount: number; fields: string[] }> = {
+    // Welcome & Landing
+    'welcome-hero':      { pipeCount: 2, fields: ['title','body'] },
+    'welcome-button':    { pipeCount: 2, fields: ['label','action'] },
     // Flat cards
     'stat':              { pipeCount: 6, fields: ['label','value','trend','status','subtitle','change'] },
     'callout':           { pipeCount: 4, fields: ['icon','value','label','body'] },
@@ -146,6 +149,7 @@ const CONTAINER_ITEM_PREFIXES: Record<string, string> = {
 const CONTAINER_TYPES   = new Set(Object.keys(CONTAINER_ITEM_PREFIXES));
 const ALL_ITEM_PREFIXES = new Set(Object.values(CONTAINER_ITEM_PREFIXES));
 const FLAT_TYPES        = new Set([
+    'welcome-hero', 'welcome-button',
     'stat', 'callout', 'person-card', 'relationship-card',
     'incident-card', 'info-card', 'country-card', 'image-card',
 ]);
@@ -287,6 +291,14 @@ function parseFlatCard(type: string, fields: string[], span?: 'full'): CardDef |
     if (span) card.span = span;
 
     switch (type) {
+        case 'welcome-hero': {
+            const [title, body] = fields;
+            return Object.assign(card, { title: n(title) ?? 'trAIn', body: n(body) ?? 'Where growth meets opportunity.' });
+        }
+        case 'welcome-button': {
+            const [label, action] = fields;
+            return Object.assign(card, { label: n(label) ?? 'Begin', action: n(action) ?? 'begin' });
+        }
         case 'stat': {
             const [label, value, trend, status, subtitle, change] = fields;
             return Object.assign(card, { label: n(label), value: n(value), trend: n(trend), status: n(status), subtitle: n(subtitle), change: n(change) });

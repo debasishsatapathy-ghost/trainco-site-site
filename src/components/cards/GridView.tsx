@@ -5,6 +5,8 @@ import { resolveFooters } from '@/utils/footerResolver';
 import { informTele } from '@/utils/informTele';
 import type { CardDef } from '@/types/cards';
 import {
+    // Welcome & Landing (2)
+    WelcomeHeroCard, WelcomeButtonCard,
     // Core Data (9)
     KPIStrip, BarChart, DonutChart, LineChart, TableCard,
     MetricList, AlertCard, StatCard, CalloutCard,
@@ -45,6 +47,9 @@ interface GridViewProps {
 /* ═══ Card Renderer — 30 Card Types ═══ */
 
 const CARD_MAP: Record<string, React.FC<any>> = {
+    // Welcome & Landing (2)
+    'welcome-hero': WelcomeHeroCard,
+    'welcome-button': WelcomeButtonCard,
     // Core Data (9)
     'kpi-strip': KPIStrip,
     'bar-chart': BarChart,
@@ -93,6 +98,9 @@ const CARD_MAP: Record<string, React.FC<any>> = {
 /* ═══ Card Size Tiers — flex-grow weights for row height distribution ═══ */
 
 const CARD_SIZE: Record<string, number> = {
+    // Welcome & Landing
+    'welcome-hero': 3,
+    'welcome-button': 1,
     // sm (compact) — strip only → flex-grow: 1
     'kpi-strip': 1,
     // md (standard) — stats, lists, moderate content → flex-grow: 2

@@ -15,6 +15,7 @@
 
 import type { LayoutProps } from './types';
 import { HeroLayout } from './HeroLayout';
+import { WelcomeLayout } from './WelcomeLayout';
 
 // ── Layout Map ──────────────────────────────────────────────────────────────
 // Maps layout name → React component. Add new layouts here.
@@ -22,6 +23,7 @@ import { HeroLayout } from './HeroLayout';
 
 export const LAYOUT_MAP: Record<string, React.FC<LayoutProps>> = {
     'hero': HeroLayout,
+    'welcome': WelcomeLayout,
     // Add more custom layouts here:
     // 'split-detail': SplitDetailLayout,
     // 'landing':      LandingLayout,
